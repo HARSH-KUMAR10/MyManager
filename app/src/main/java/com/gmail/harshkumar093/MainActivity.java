@@ -30,10 +30,14 @@ class HarshTime{
         }
     }
     String harshGetCurrentTime(){
+        String hourNowString=""+hourNow,minuteNowString=""+minuteNow;
         if(hourNow<10){
-            return "0"+hourNow+":"+minuteNow+" "+AmOrPm;
+            hourNowString = "0"+hourNow;
         }
-        return hourNow+":"+minuteNow+" "+AmOrPm;
+        if(minuteNow<10){
+            minuteNowString ="0"+minuteNow;
+        }
+        return hourNowString+":"+minuteNowString+" "+AmOrPm;
     }
     String harshGetCurrentDate(){
         String dateNowString,monthNowString,yearNowString;

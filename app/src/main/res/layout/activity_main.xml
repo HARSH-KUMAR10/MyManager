@@ -16,8 +16,83 @@
         android:textAlignment="center"
         android:gravity="center"
         android:text="@string/date_time"
-        android:textSize="20dp"
-        android:textColor="@color/colorAccent"
+        android:textSize="25dp"
+        android:textColor="@color/lightgreen"
         android:textStyle="bold"
         android:layout_marginLeft="50dp" />
+
+    <Button
+        android:id="@+id/YourTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="40dp"
+        android:paddingHorizontal="30dp"
+        android:paddingVertical="50dp"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:background="@drawable/gradient_1"
+        android:text="Your Time" />
+
+    <Button
+        android:id="@+id/ToDoList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="230dp"
+        android:paddingHorizontal="30dp"
+        android:paddingVertical="50dp"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:background="@drawable/gradient_1"
+        android:text="To Do List" />
+
+    <Button
+        android:id="@+id/Calculator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="40dp"
+        android:paddingHorizontal="30dp"
+        android:paddingVertical="50dp"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:background="@drawable/gradient_2"
+        android:text="Calculator" />
+
+    <Button
+        android:id="@+id/Extras"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="230dp"
+        android:paddingHorizontal="30dp"
+        android:paddingVertical="50dp"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:background="@drawable/gradient_2"
+        android:text="   Extras    " />
+    <Button
+        android:id="@+id/Exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="490dp"
+        android:layout_centerHorizontal="true"
+        android:paddingHorizontal="50dp"
+        android:paddingVertical="20dp"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        android:textAllCaps="false"
+        android:background="@drawable/gradient_3"
+        android:text="Exit" />
+
 </RelativeLayout>
