@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">My Manager</string>
+    <string name="date_time">Date-Time</string>
 </resources>
