@@ -18,3 +18,6 @@ project code started.
 
 07/09/2020:
 code for UI written and UI styling part-1 completed
+
+08/09/2020:
+Code for Timer and stopwatch buttons are added.
