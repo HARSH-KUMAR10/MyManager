@@ -100,5 +100,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+
+    }
+
+    public void gotoToDoList(View view) {
+        Intent intent = new Intent(MainActivity.this,Main3Activity.class);
+        startActivity(intent);
     }
 }

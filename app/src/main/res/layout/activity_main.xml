@@ -49,7 +49,8 @@
         android:textColor="@color/white"
         android:textAllCaps="false"
         android:background="@drawable/gradient_1"
-        android:text="To Do List" />
+        android:text="To Do List"
+        android:onClick="gotoToDoList"/>
 
     <Button
         android:id="@+id/Calculator"
