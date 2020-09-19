@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,29 +24,35 @@ class ControlViews{
     Button Completed,Back,AddTask;
     RelativeLayout myLayOutForToDo;
     Context classctx;
-    TaskListItem TaskArrayList[] = new TaskListItem[30];
+    TaskListItem TaskArrayList[] = new TaskListItem[100];
+    int DeletedIndexes[] = new int[100];
+    int posisitonofdeletedIndexes=0;
     int currentItemNumber =0;
     /*
     Task List save
      */
     class TaskListItem {
-        Button done, delete;
+        TextView done, delete;
         TextView TaskList;
         TaskListItem(){
-            done = new Button(classctx);
-            delete = new Button(classctx);
+            done = new TextView(classctx);
+            delete = new TextView(classctx);
             TaskList = new TextView(classctx);
             done.setText("O");
-            done.setTextSize(15);
+            done.setTextSize(20);
             done.setBackgroundResource(R.color.lightgreen);
             done.setTextColor(Color.parseColor("#ffffff"));
+            done.setPadding(20,5,20,5);
             delete.setText("X");
-            delete.setTextSize(15);
+            delete.setTextSize(20);
             delete.setBackgroundResource(R.color.red);
             delete.setTextColor(Color.parseColor("#ffffff"));
+            delete.setPadding(20,5,20,5);
             TaskList.setText("hello");
-            TaskList.setTextSize(20);
+            TaskList.setTextSize(15);
+            TaskList.setAllCaps(true);
             TaskList.setBackgroundResource(R.color.buttonColor);
+            TaskList.setPadding(20,5,20,5);
         }
     }
     ControlViews(Context ctx){
@@ -64,7 +71,7 @@ class ControlViews{
         Back = new Button(ctx);
         EnterTask =new  EditText(ctx);
         AddTask = new Button(ctx);
-        for(int i=0;i<20;i++){
+        for(int i=0;i<100;i++){
             TaskArrayList[i] = new TaskListItem();
         }
         /*
@@ -99,6 +106,10 @@ class ControlViews{
         AddTask.setText("add");
         AddTask.setBackgroundResource(R.color.white);
         AddTask.setTextColor(Color.parseColor("#22ff22"));
+
+        for(int i=0;i<100;i++){
+            DeletedIndexes[i]=-1;
+        }
     }
     void showAllViews(){
         RelativeLayout.LayoutParams layoutParams1 = new RelativeLayout.LayoutParams
@@ -114,23 +125,24 @@ class ControlViews{
         RelativeLayout.LayoutParams layoutParams6 = new RelativeLayout.LayoutParams
                 (RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
         layoutParams1.leftMargin=30;
-        layoutParams1.topMargin=50;
-        layoutParams2.topMargin=50;
+        layoutParams1.topMargin=20;
+        layoutParams2.topMargin=20;
         layoutParams2.leftMargin=750;
-        layoutParams3.topMargin=200;
+        layoutParams3.topMargin=170;
         layoutParams3.leftMargin=100;
         layoutParams4.leftMargin=700;
-        layoutParams4.topMargin=200;
-        layoutParams5.topMargin=1700;
+        layoutParams4.topMargin=170;
+        layoutParams5.topMargin=1550;
         layoutParams5.leftMargin=70;
         layoutParams6.leftMargin=730;
-        layoutParams6.topMargin=1700;
+        layoutParams6.topMargin=1550;
         myLayOutForToDo.addView(Name,layoutParams1);
         myLayOutForToDo.addView(Completed,layoutParams2);
         myLayOutForToDo.addView(DateNow,layoutParams3);
         myLayOutForToDo.addView(TimeNow,layoutParams4);
         myLayOutForToDo.addView(EnterTask,layoutParams5);
         myLayOutForToDo.addView(AddTask,layoutParams6);
+        setOnClickForDone();
     }
     void RemoveAllTask(){
         for(int i=0;i<currentItemNumber;i++){
@@ -142,6 +154,7 @@ class ControlViews{
     void ShowAllTask(){
         RelativeLayout.LayoutParams layoutParams[] = new RelativeLayout.LayoutParams[60];
         int ItemNumber=0;
+        int layOutincrement=0;
         for(int i=0;i<currentItemNumber*3;i+=3){
             layoutParams[i] = new RelativeLayout.LayoutParams
                     (RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -149,19 +162,58 @@ class ControlViews{
                     (RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
             layoutParams[i+2] = new RelativeLayout.LayoutParams
                     (RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
-            layoutParams[i].topMargin=300+(50*i);
+            layoutParams[i].topMargin=300+(40*layOutincrement);
             layoutParams[i].leftMargin=50;
-            layoutParams[i+1].topMargin=320+(50*i);
-            layoutParams[i+1].leftMargin=350;
-            layoutParams[i+2].topMargin=300+(50*i);
-            layoutParams[i+2].leftMargin=800;
-            myLayOutForToDo.addView(TaskArrayList[ItemNumber].TaskList,layoutParams[i+1]);
-            myLayOutForToDo.addView(TaskArrayList[ItemNumber].done,layoutParams[i]);
-            myLayOutForToDo.addView(TaskArrayList[ItemNumber].delete,layoutParams[i+2]);
+            layoutParams[i+1].rightMargin=150;
+            layoutParams[i+1].topMargin=300+(40*layOutincrement);
+            layoutParams[i+1].leftMargin=170;
+            layoutParams[i+2].topMargin=300+(40*layOutincrement);
+            layoutParams[i+2].leftMargin=950;
+            boolean toprint=true;
+            for(int j=0;j<posisitonofdeletedIndexes;j++){
+                if(ItemNumber==DeletedIndexes[j]){
+                    toprint=false;
+                }
+            }
+            if(toprint) {
+                layOutincrement+=3;
+                myLayOutForToDo.addView(TaskArrayList[ItemNumber].TaskList, layoutParams[i + 1]);
+                myLayOutForToDo.addView(TaskArrayList[ItemNumber].done, layoutParams[i]);
+                myLayOutForToDo.addView(TaskArrayList[ItemNumber].delete, layoutParams[i + 2]);
+            }
             ItemNumber++;
             if(ItemNumber>currentItemNumber){
                 break;
             }
+        }
+    }
+/*    void removefromlist(int in){
+        if(in==(currentItemNumber-1)){
+            currentItemNumber--;
+        }else {
+            for (int i = in; i < currentItemNumber; i++) {
+                TaskArrayList[i]=TaskArrayList[i+1];
+            }
+            currentItemNumber--;
+        }
+    }*/
+    void setOnClickForDone(){
+        for(int i=0;i<100;i++){
+            final int finalI = i;
+            TaskArrayList[i].done.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TaskArrayList[finalI].TaskList.setText("task completed");
+                }
+            });
+            TaskArrayList[i].delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    RemoveAllTask();
+                    DeletedIndexes[posisitonofdeletedIndexes++] = finalI;
+                    ShowAllTask();
+                }
+            });
         }
     }
 }
@@ -170,11 +222,15 @@ class ControlViews{
 public class Main3Activity extends AppCompatActivity {
     Context ctx;
     ControlViews object;
+    TextView obj ;
+    int i=0;
+    int index;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
         ctx = getApplication();
+        obj = new TextView(ctx);
         object = new ControlViews(ctx);
         object.myLayOutForToDo = (RelativeLayout) findViewById(R.id.ToDoListLayoutXML);
         object.showAllViews();
@@ -188,5 +244,15 @@ public class Main3Activity extends AppCompatActivity {
                 object.EnterTask.setText("");
             }
         });
+        /*obj.setText("click me");
+        obj.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             obj.setText("clicked"+(i++)+"times");
+            }
+        });
+        object.myLayOutForToDo.addView(obj);*/
+
     }
+
 }
