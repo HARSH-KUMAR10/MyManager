@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="300dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginLeft="30dp"
         android:paddingHorizontal="30dp"
         android:paddingVertical="50dp"
         android:textStyle="bold"
@@ -65,7 +65,8 @@
         android:textColor="@color/white"
         android:textAllCaps="false"
         android:background="@drawable/gradient_2"
-        android:text="Calculator" />
+        android:text="Calculations"
+        android:onClick="gotoCalculation"/>
 
     <Button
         android:id="@+id/Extras"

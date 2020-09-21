@@ -107,4 +107,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this,Main3Activity.class);
         startActivity(intent);
     }
+    public void gotoCalculation(View view){
+        Intent intent = new Intent(MainActivity.this,Main4Activity.class);
+        startActivity(intent);
+    }
 }
